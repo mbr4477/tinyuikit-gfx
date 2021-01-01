@@ -57,7 +57,6 @@ Box GFXCanvas::getTextBounds(std::string text)
 
 void GFXCanvas::addText(std::string text, unsigned int x, unsigned int y, Color color)
 {
-    Serial.println("Add text");
     _gfx->setCursor(x, y);
     _gfx->setTextColor(color565(color));
     _gfx->print(text.c_str());
