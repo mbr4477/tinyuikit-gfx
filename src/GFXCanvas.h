@@ -1,5 +1,5 @@
-#ifndef _GFXCANVAS_H_
-#define _GFXCANVAS_H_
+#ifndef _UI_GFXCANVAS_H_
+#define _UI_GFXCANVAS_H_
 #include "Adafruit_GFX.h"
 #include "ui.h"
 
@@ -14,6 +14,12 @@ namespace ui
         void strokeRect(Box rect, Color border);
         void addText(std::string text, unsigned int x, unsigned int y, Color color);
         Box getTextBounds(std::string text);
+        void strokeLine(
+            unsigned int x1,
+            unsigned int y1,
+            unsigned int x2,
+            unsigned int y2,
+            Color color);
 
     private:
         Adafruit_GFX *_gfx;

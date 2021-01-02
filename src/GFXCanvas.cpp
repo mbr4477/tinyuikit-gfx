@@ -61,3 +61,13 @@ void GFXCanvas::addText(std::string text, unsigned int x, unsigned int y, Color 
     _gfx->setTextColor(color565(color));
     _gfx->print(text.c_str());
 }
+
+void GFXCanvas::strokeLine(
+    unsigned int x1,
+    unsigned int y1,
+    unsigned int x2,
+    unsigned int y2,
+    Color color)
+{
+    _gfx->drawLine(x1, y1, x2, y2, color565(color));
+}
