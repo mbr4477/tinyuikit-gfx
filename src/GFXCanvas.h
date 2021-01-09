@@ -8,7 +8,12 @@ namespace ui
     class GFXCanvas : public Canvas
     {
     public:
-        GFXCanvas(Adafruit_GFX &gfx);
+        enum ColorOrder
+        {
+            RGB,
+            BGR
+        };
+        GFXCanvas(Adafruit_GFX &gfx, ColorOrder order);
         void clearRect(Box rect);
         void fillRect(Box rect, Color fill);
         void strokeRect(Box rect, Color border);
@@ -23,6 +28,8 @@ namespace ui
 
     private:
         Adafruit_GFX *_gfx;
+        ColorOrder _order;
+        uint16_t color565(Color color);
     };
 } // namespace ui
 

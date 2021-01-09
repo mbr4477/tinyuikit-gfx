@@ -4,7 +4,7 @@
 
 using namespace ui;
 
-uint16_t color565(Color color)
+uint16_t GFXCanvas::color565(Color color)
 {
     uint8_t red = color.getRed();
     uint8_t green = color.getGreen();
@@ -12,17 +12,29 @@ uint16_t color565(Color color)
     red = (0x1F * red / 255) & 0x1F;
     green = (0x3F * green / 255) & 0x3F;
     blue = (0x1F * blue / 255) & 0x1F;
-    return (blue << 11) | (green << 5) | red;
+    uint16_t out;
+    switch (_order)
+    {
+    case BGR:
+        out = (blue << 11) | (green << 5) | red;
+        break;
+    default:
+    case RGB:
+        out = (red << 11) | (green << 5) | blue;
+        break;
+    }
+    return out;
 }
 
-GFXCanvas::GFXCanvas(Adafruit_GFX &gfx)
-    : Canvas(Box(0, 0, gfx.width(), gfx.height())), _gfx(&gfx)
+GFXCanvas::GFXCanvas(Adafruit_GFX &gfx, ColorOrder order)
+    : Canvas(Box(0, 0, gfx.width(), gfx.height())), _gfx(&gfx),
+      _order{order}
 {
 }
 
 void GFXCanvas::clearRect(Box rect)
 {
-    fillRect(rect, BLACK);
+    fillRect(rect, {0, 0, 0});
 }
 
 void GFXCanvas::fillRect(Box rect, Color fill)
